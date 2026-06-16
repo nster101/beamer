@@ -19,6 +19,63 @@ their own LaTeX documents.
 - Current maintainers: Joseph Wright and samcarter (see `AUTHORS.md`);
   originally by Till Tantau.
 
+## Project direction and mandate
+
+This fork extends `beamer` with the goal of making it **easier to use and more
+modern**, so that it can be a **complete replacement for PowerPoint or Canva**
+for presentations. The base `beamer` class is excellent in an academic setting,
+but its stock templates and tooling lack what is needed to look professional in
+a business setting. We are extending it so its templates become **more flexible,
+more professional, and more mainstream**.
+
+Specific aims:
+
+- Make authoring easier, **especially with TikZ and PGF** (smoother integration,
+  helpers, sensible defaults).
+- Provide **professional, business-grade templates** that look modern out of the
+  box — not just academic.
+- Add the functionality and tooling required to close the gap with mainstream
+  slide tools.
+
+**Where changes go — prefer templates, not the core.** Start by creating **new
+themes/templates** (under `base/themes/`, following the naming rules below). If a
+feature can live inside a template, it **must** go there. Only modify the base
+`beamer` code (`beamer.cls`, `beamerbase*.sty`) when it is proven to be a
+**significant limiting factor for multiple** things we want to do — and call that
+out explicitly in the plan and the issue before doing it.
+
+## Mandatory development workflow (ruleset)
+
+These rules are **binding** and override the lighter "Workflow expectations"
+section below. Apply them to every feature or fix.
+
+1. **Plan first — never start work without a plan.** Do not write feature/fix
+   code before a plan exists. For anything non-trivial, use plan mode and the
+   `Plan` agent to produce the plan.
+2. **Scope thoroughly when planning.** A plan must cover: the problem/goal, the
+   concrete approach, which files/templates are touched, whether it can be done
+   purely in a template (it should be, unless the core is a proven multi-feature
+   blocker), test/doc impact, and acceptance criteria.
+3. **Surface decisions with tradeoffs.** Whenever a design decision is open,
+   present the options with their **consequences and tradeoffs** and a
+   recommendation, and get a choice before proceeding (use `AskUserQuestion`).
+4. **Get approval.** Surface the plan for the user's explicit approval **before**
+   any implementation. No approval → no code.
+5. **Create a GitHub issue.** Once approved, capture the planned feature/fix as a
+   **new GitHub issue** that contains the full scope: goal, approach, affected
+   files, decisions made (with rationale), and acceptance criteria. The issue is
+   the source of truth for the work.
+6. **One issue → one branch → one PR.** Each issue is worked on its **own**
+   branch, in isolation, and lands via a **pull request** that references the
+   issue. Do not bundle multiple issues into one branch/PR.
+7. **Never commit to `main`.** Never commit or push to `main` directly, and never
+   open a PR that is really a direct edit of `main`. All work flows through a
+   feature branch and PR. Open PRs as **drafts** until ready for review.
+
+Quick gate to self-check before writing any feature code: *Is there an approved
+plan? Is there an issue? Am I on a dedicated branch (not `main`)?* If any answer
+is "no", stop and fix that first.
+
 ## Repository layout
 
 ```
