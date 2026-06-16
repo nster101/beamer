@@ -1,0 +1,49 @@
+% This file is part of the beamer package.
+%
+% Copyright 2026 by the beamer contributors
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file LICENSE.md for more details.
+%
+% Aurora: a modern, flat, corporate presentation theme.
+%
+%   \usetheme{Aurora}                 % default slate/teal look
+%   \usetheme[palette=blue]{Aurora}   % a named ready-made palette
+%
+% Rebrand with a single colour (do not pass a palette):
+%
+%   \definecolor{auroraAccent}{HTML}{0B5FFF}
+%   \usetheme{Aurora}
+%
+% Best results on XeTeX/LuaTeX (modern sans via fontspec); pdfTeX is fully
+% supported with a graceful font fallback.
+
+\mode<presentation>
+
+% palette=<name> loads beameraurora-palette-<name>.sty before the colour
+% theme. With no palette given, the colour theme's slate/teal \providecolor
+% defaults apply -- and a user \definecolor before \usetheme still wins.
+\def\beamer@aurora@palette{}
+\DeclareOptionBeamer{palette}{\def\beamer@aurora@palette{#1}}
+\ProcessOptionsBeamer
+
+\ifx\beamer@aurora@palette\@empty
+\else
+  \edef\beamer@aurora@palettefile{beameraurora-palette-\beamer@aurora@palette}%
+  \IfFileExists{\beamer@aurora@palettefile.sty}
+    {\expandafter\RequirePackage\expandafter{\beamer@aurora@palettefile}}
+    {\PackageWarning{beamerthemeAurora}{Unknown Aurora palette
+      '\beamer@aurora@palette'; using the built-in slate/teal default}}%
+\fi
+
+\usecolortheme{aurora}
+\usefonttheme{aurora}
+\useinnertheme{aurora}
+\useoutertheme{aurora}
+
+\mode
+<all>

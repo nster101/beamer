@@ -8,6 +8,12 @@ a major and minor version only.
 
 ## [Unreleased]
 
+### New
+
+- added modern, flat, corporate `Aurora` presentation theme together with its
+  composable `aurora` colour/font/inner/outer themes and a single-swap-point
+  colour palette system (named palettes `slate`, `blue`, `teal`); see #2
+
 ### Fixed
 
 - redefined `\hyper@natlinkbreak`, see https://github.com/josephwright/beamer/pull/961#issuecomment-4149877759

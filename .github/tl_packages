@@ -27,6 +27,7 @@ epstopdf
 epstopdf-pkg
 etoolbox
 extsizes
+fontspec
 geometry
 helvetic
 hypdoc

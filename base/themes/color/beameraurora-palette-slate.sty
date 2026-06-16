@@ -1,0 +1,25 @@
+% This file is part of the beamer package.
+%
+% Copyright 2026 by the beamer contributors
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file LICENSE.md for more details.
+%
+% Aurora palette: slate / teal (the default look).
+%
+% A palette file simply hard-defines the five raw Aurora colours. It is
+% loaded *before* beamercolorthemeaurora.sty (which only \providecolor's
+% defaults), so these win. To rebrand with a single colour instead, do not
+% pass a palette and just \definecolor{auroraAccent}{...} before \usetheme.
+
+\definecolor{auroraAccent}{HTML}{0F766E}    % brand primary (teal)
+\definecolor{auroraAccentAlt}{HTML}{D97706} % secondary / alert (amber)
+\definecolor{auroraInk}{HTML}{1E293B}       % near-black slate text
+\definecolor{auroraGray}{HTML}{64748B}      % neutral mid-gray
+\definecolor{auroraPaper}{HTML}{FFFFFF}     % slide background
+
+\endinput
