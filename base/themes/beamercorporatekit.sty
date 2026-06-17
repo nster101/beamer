@@ -1,0 +1,231 @@
+% This file is part of the beamer package.
+%
+% Copyright 2026 by the beamer contributors
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file LICENSE.md for more details.
+%
+% beamercorporatekit -- shared engine for the corporate theme family.
+%
+% Two reusable building blocks that corporate themes (Aurora, Corridor, ...)
+% load instead of re-implementing:
+%
+%   \setcorporatepalette{...}   -- derive the full beamer colour set from a
+%                                  small "two-anchor" palette (brand + accent
+%                                  + ink/gray/paper/alert), so a theme only
+%                                  declares its raw colours.
+%   \setcorporatesansfont{...}  -- the iftex-gated fontspec / pdfTeX-package
+%   \setcorporatemonofont{...}     font loading with graceful fallback.
+%
+% This is a theme-consumed package, not core: it touches no beamer.cls /
+% beamerbase*.sty and is loaded via \RequirePackage{beamercorporatekit}.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercorporatekit}
+  [2026/06/17 v0.1 Shared corporate theme engine for beamer]
+
+\RequirePackage{keyval}
+\RequirePackage{iftex}
+
+% Are we on a modern (fontspec-capable) engine?
+\newif\ifcorp@modern
+\ifxetex\corp@moderntrue\fi
+\ifluatex\corp@moderntrue\fi
+
+% Sentinel for "key not given"
+\def\corp@undef{\corp@undef}
+
+% Set a beamer colour, expanding the \corp@ palette macros in the spec so the
+% concrete colour names are baked in (independent of later \setcorporatepalette
+% calls).
+\newcommand{\corp@setcol}[2]{%
+  \begingroup
+    \edef\corp@x{\endgroup\noexpand\setbeamercolor{#1}{#2}}%
+  \corp@x}
+
+%
+% ============================ PALETTE ENGINE ============================
+%
+
+\define@key{corp@pal}{brand}{\def\corp@brand{#1}}
+\define@key{corp@pal}{accent}{\def\corp@accent{#1}}
+\define@key{corp@pal}{ink}{\def\corp@ink{#1}}
+\define@key{corp@pal}{gray}{\def\corp@gray{#1}}
+\define@key{corp@pal}{paper}{\def\corp@paper{#1}}
+\define@key{corp@pal}{alert}{\def\corp@alert{#1}}
+\define@key{corp@pal}{example}{\def\corp@example{#1}}
+\define@key{corp@pal}{examplebody}{\def\corp@examplebody{#1}}
+\define@key{corp@pal}{panel}{\def\corp@panel{#1}}
+\define@key{corp@pal}{muted}{\def\corp@muted{#1}}
+\define@key{corp@pal}{paletteshade}{\def\corp@shade{#1}}
+\define@key{corp@pal}{titlestyle}{\def\corp@titlestyle{#1}}
+
+\def\corp@light{light}
+\def\corp@dark{dark}
+
+\newcommand{\setcorporatepalette}[1]{%
+  % anchors (no defaults -- a theme must give these)
+  \let\corp@brand\corp@undef \let\corp@accent\corp@undef
+  \let\corp@ink\corp@undef   \let\corp@gray\corp@undef
+  \let\corp@paper\corp@undef \let\corp@alert\corp@undef
+  % derived knobs (sentinels -> filled with Aurora-matching defaults below)
+  \let\corp@example\corp@undef \let\corp@examplebody\corp@undef
+  \let\corp@panel\corp@undef   \let\corp@muted\corp@undef
+  \let\corp@shade\corp@undef
+  \def\corp@titlestyle{light}%
+  \setkeys{corp@pal}{#1}%
+  % derived defaults (each reproduces the original Aurora derivation)
+  \ifx\corp@shade\corp@undef       \let\corp@shade\corp@ink\fi
+  \ifx\corp@example\corp@undef     \edef\corp@example{\corp@accent!70!\corp@ink}\fi
+  \ifx\corp@examplebody\corp@undef \edef\corp@examplebody{\corp@accent!8!\corp@paper}\fi
+  \ifx\corp@panel\corp@undef       \edef\corp@panel{\corp@gray!12!\corp@paper}\fi
+  \ifx\corp@muted\corp@undef       \edef\corp@muted{\corp@gray!92!\corp@ink}\fi
+  %
+  % --- foundations ---
+  \corp@setcol{normal text}{fg=\corp@ink,bg=\corp@paper}%
+  \corp@setcol{alerted text}{fg=\corp@alert}%
+  \corp@setcol{example text}{fg=\corp@example}%
+  \corp@setcol{structure}{fg=\corp@accent}%
+  \setbeamercolor{background canvas}{parent=normal text}%
+  \setbeamercolor{background}{parent=background canvas}%
+  % --- palette ladder: accent fading toward the shade, ending at quaternary ---
+  \corp@setcol{palette primary}{fg=\corp@accent}%
+  \corp@setcol{palette secondary}{fg=\corp@accent!80!\corp@shade}%
+  \corp@setcol{palette tertiary}{fg=\corp@accent!60!\corp@shade}%
+  \corp@setcol{palette quaternary}{fg=\corp@shade}%
+  % --- titles (brand) ---
+  \corp@setcol{titlelike}{fg=\corp@brand}%
+  \setbeamercolor{titlegraphic}{}%
+  % --- table of contents ---
+  \corp@setcol{section in toc}{fg=\corp@ink}%
+  \corp@setcol{subsection in toc}{fg=\corp@muted}%
+  % --- chrome (kept light) ---
+  \corp@setcol{headline}{fg=\corp@muted,bg=\corp@paper}%
+  \corp@setcol{footline}{fg=\corp@muted,bg=\corp@paper}%
+  \corp@setcol{page number in head/foot}{fg=\corp@muted}%
+  \corp@setcol{title in head/foot}{fg=\corp@muted}%
+  \corp@setcol{author in head/foot}{fg=\corp@muted}%
+  \corp@setcol{date in head/foot}{fg=\corp@muted}%
+  \corp@setcol{section in head/foot}{fg=\corp@muted}%
+  \corp@setcol{subsection in head/foot}{fg=\corp@muted}%
+  \corp@setcol{logo}{fg=\corp@accent}%
+  % --- frame title (flat, brand, no fill) ---
+  \corp@setcol{frametitle}{fg=\corp@brand,bg=}%
+  \corp@setcol{framesubtitle}{fg=\corp@muted}%
+  % --- flat blocks ---
+  \corp@setcol{block title}{fg=\corp@paper,bg=\corp@brand}%
+  \corp@setcol{block body}{fg=\corp@ink,bg=\corp@panel}%
+  \corp@setcol{block title alerted}{fg=\corp@paper,bg=\corp@alert}%
+  \corp@setcol{block body alerted}{fg=\corp@ink,bg=\corp@alert!12!\corp@paper}%
+  \corp@setcol{block title example}{fg=\corp@paper,bg=\corp@example}%
+  \corp@setcol{block body example}{fg=\corp@ink,bg=\corp@examplebody}%
+  % --- list markers ---
+  \corp@setcol{item}{fg=\corp@accent}%
+  \corp@setcol{subitem}{fg=\corp@accent!75!\corp@shade}%
+  \corp@setcol{subsubitem}{fg=\corp@accent!55!\corp@shade}%
+  \setbeamercolor{itemize item}{parent=item}%
+  \setbeamercolor{itemize subitem}{parent=subitem}%
+  \setbeamercolor{itemize subsubitem}{parent=subsubitem}%
+  \setbeamercolor{enumerate item}{parent=item}%
+  \corp@setcol{caption name}{fg=\corp@muted}%
+  \setbeamercolor{separation line}{}%
+  % --- title page + dividers depend on light vs dark surface ---
+  \ifx\corp@titlestyle\corp@dark
+    \corp@setcol{title}{fg=\corp@paper}%
+    \corp@setcol{subtitle}{fg=\corp@gray!45!\corp@paper}%
+    \corp@setcol{author}{fg=\corp@paper}%
+    \corp@setcol{institute}{fg=\corp@gray!60!\corp@paper}%
+    \corp@setcol{date}{fg=\corp@gray!60!\corp@paper}%
+    \corp@setcol{part name}{fg=\corp@accent}%
+    \corp@setcol{part title}{fg=\corp@paper}%
+    \corp@setcol{section name}{fg=\corp@accent}%
+    \corp@setcol{section title}{fg=\corp@paper}%
+    \corp@setcol{subsection name}{fg=\corp@accent}%
+    \corp@setcol{subsection title}{fg=\corp@paper}%
+  \else
+    \setbeamercolor{title}{parent=titlelike}%
+    \corp@setcol{subtitle}{fg=\corp@muted}%
+    \corp@setcol{author}{fg=\corp@ink}%
+    \corp@setcol{institute}{fg=\corp@muted}%
+    \corp@setcol{date}{fg=\corp@muted}%
+    \corp@setcol{part name}{fg=\corp@muted}%
+    \corp@setcol{part title}{fg=\corp@brand}%
+    \corp@setcol{section name}{fg=\corp@muted}%
+    \corp@setcol{section title}{fg=\corp@brand}%
+    \corp@setcol{subsection name}{fg=\corp@muted}%
+    \corp@setcol{subsection title}{fg=\corp@brand}%
+  \fi
+}
+
+%
+% ============================= FONT ENGINE =============================
+%
+
+\define@key{corp@font}{font}{\def\corp@ffont{#1}}
+\define@key{corp@font}{options}{\def\corp@fopts{#1}}
+\define@key{corp@font}{fallback}{\def\corp@ffallback{#1}}
+\define@key{corp@font}{package}{\def\corp@fpkg{#1}}
+\define@key{corp@font}{packageoptions}{\def\corp@fpkgopts{#1}}
+
+\newif\ifcorp@fontset
+
+% Try each family in the (comma-separated) fallback list until one exists.
+\newcommand{\corp@sansfallback}{%
+  \corp@fontsetfalse
+  \@for\corp@f:=\corp@ffallback\do{%
+    \ifcorp@fontset\else
+      \IfFontExistsTF{\corp@f}{\setsansfont{\corp@f}\corp@fontsettrue}{}%
+    \fi}}
+
+\newcommand{\setcorporatesansfont}[1]{%
+  \let\corp@ffont\corp@undef
+  \def\corp@fopts{}\def\corp@ffallback{}\def\corp@fpkg{}%
+  \def\corp@fpkgopts{sfdefault}%
+  \setkeys{corp@font}{#1}%
+  \ifcorp@modern
+    \RequirePackage{fontspec}%
+    \IfFontExistsTF{\corp@ffont}
+      {\ifx\corp@fopts\@empty
+         \setsansfont{\corp@ffont}%
+       \else
+         \setsansfont{\corp@ffont}[\corp@fopts]%
+       \fi}
+      {\corp@sansfallback}%
+  \else
+    \ifx\corp@fpkg\@empty\else
+      \IfFileExists{\corp@fpkg.sty}
+        {\edef\corp@x{\noexpand\RequirePackage[\corp@fpkgopts]{\corp@fpkg}}\corp@x}{}%
+    \fi
+  \fi
+  % Modern decks are set in sans; holds on every engine and font outcome.
+  \renewcommand*\familydefault{\sfdefault}%
+}
+
+\newcommand{\corp@monofallback}{%
+  \corp@fontsetfalse
+  \@for\corp@f:=\corp@ffallback\do{%
+    \ifcorp@fontset\else
+      \IfFontExistsTF{\corp@f}{\setmonofont{\corp@f}\corp@fontsettrue}{}%
+    \fi}}
+
+\newcommand{\setcorporatemonofont}[1]{%
+  \let\corp@ffont\corp@undef
+  \def\corp@ffallback{}\def\corp@fpkg{}%
+  \setkeys{corp@font}{#1}%
+  \ifcorp@modern
+    \RequirePackage{fontspec}%
+    \IfFontExistsTF{\corp@ffont}
+      {\setmonofont{\corp@ffont}}
+      {\corp@monofallback}%
+  \else
+    \ifx\corp@fpkg\@empty\else
+      \IfFileExists{\corp@fpkg.sty}{\RequirePackage{\corp@fpkg}}{}%
+    \fi
+  \fi
+}
+
+\endinput
