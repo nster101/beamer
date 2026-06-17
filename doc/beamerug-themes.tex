@@ -98,6 +98,20 @@ All themes listed without author mentioned were developed by Till. If a theme ha
     A convenience wrapper that sets the corresponding metadata and emits a plain title frame in one call.
   \end{command}
 
+  For longer decks, Corridor provides full-bleed navy section and part dividers in the same style as the title page. They are installed as the |section page| and |part page| templates, so |\sectionpage| and |\partpage| use them. To insert a divider automatically at the start of every section or part:
+
+  \begin{command}{\corridorautosection}
+    Enables an automatic |section page| divider frame at the start of each |\section|. Off by default.
+  \end{command}
+
+  \begin{command}{\corridorautopart}
+    Enables an automatic |part page| divider frame at the start of each |\part|. Off by default.
+  \end{command}
+
+  \begin{command}{\corridoragenda\oarg{title}}
+    Emits a frame (titled \emph{Agenda} by default) whose body is the table of contents, styled with teal section markers. For a progress agenda that highlights the current section, use a normal frame containing |\tableofcontents[currentsection]| instead.
+  \end{command}
+
   Corridor is a covered walkway connecting parts of a building---fitting for a theme meant to connect the parts of a professional presentation.
 \end{themeexample}
 
