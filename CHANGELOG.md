@@ -28,6 +28,10 @@ a major and minor version only.
 - `Corridor`: narrative slides --- a full-bleed `\corridorquote` frame, a
   `\corridorstatement` big-statement frame, a `\corridorcallout` box
   (note/warn/risk) and a `\corridortwoup` two-up layout; see #7
+- `Corridor`: visual slides --- a `\corridorfullimage` full-bleed image frame,
+  a `\corridorsplit` image-and-caption layout and a `corridorcanvas`
+  environment with preloaded on-brand TikZ node styles (`pill`, `pillhot`,
+  accent arrows); see #8
 
 ### Changed
 

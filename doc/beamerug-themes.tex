@@ -148,6 +148,20 @@ All themes listed without author mentioned were developed by Till. If a theme ha
     A clean two-up emphasis layout with aligned accent headers.
   \end{command}
 
+  For image-led and diagram slides, Corridor adds:
+
+  \begin{command}{\corridorfullimage\oarg{overlay title}\marg{image}}
+    A frame whose \meta{image} fills the whole slide, with an optional navy scrim band carrying an overlaid title at the bottom.
+  \end{command}
+
+  \begin{command}{\corridorsplit\marg{image}\marg{text}}
+    A half-image, half-text layout with a teal caption rule.
+  \end{command}
+
+  \begin{command}{corridorcanvas \rm(environment)}
+    A centered |tikzpicture| preloaded with on-brand node styles---|pill|, |pillhot|, |corridorarrow| and |corridorflow|---so diagrams need no per-frame |\tikzset|. The styles are namespaced under the |corridor| TikZ style; |\corridortikzset| enables them inside a hand-built |tikzpicture|.
+  \end{command}
+
   Corridor is a covered walkway connecting parts of a building---fitting for a theme meant to connect the parts of a professional presentation.
 \end{themeexample}
 
