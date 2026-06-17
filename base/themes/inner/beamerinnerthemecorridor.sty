@@ -25,7 +25,9 @@
 % Fallback raws so the inner theme is usable on its own.
 \providecolor{corNavy}{HTML}{0C2340}
 \providecolor{corTeal}{HTML}{0FA3A3}
+\providecolor{corAmber}{HTML}{D98E04}
 \providecolor{corRed}{HTML}{B0413E}
+\providecolor{corInk}{HTML}{222A33}
 \providecolor{corGray}{HTML}{66707A}
 \providecolor{corFaint}{HTML}{E7E9E6}
 \providecolor{corPaper}{HTML}{FCFCFA}
@@ -253,6 +255,64 @@
       {\fontsize{9}{12}\selectfont\color{corInk}#3\par}
     \end{minipage}}%
   \end{column}}
+
+% ----------------------------------------------------------- narrative --
+% Emphasis slides: a full-bleed quote frame, a big-statement frame, an inline
+% callout box and a two-up emphasis layout.
+
+% \corridorquote{quote}{attribution} -- full-bleed navy quote frame
+\newcommand{\corridorquote}[2]{%
+  \begin{frame}[plain,noframenumbering]
+    \begin{tikzpicture}[remember picture,overlay]
+      \fill[corNavy] (current page.south west) rectangle (current page.north east);
+      \node[anchor=west,text width=0.80\paperwidth,inner sep=0pt]
+        at ($(current page.west)+(1.05,0.45)$) {%
+          {\color{corTeal}\fontsize{34}{34}\selectfont\bfseries``\par}%
+          \vspace{-0.2em}%
+          {\usebeamerfont{frametitle}\color{corPaper}#1\par}%
+          \vspace{0.7em}%
+          {\color{corTeal}\rule[0.28ex]{1.0cm}{2pt}}\hspace{0.45em}%
+          {\fontsize{9}{12}\selectfont\color{corFaint}#2}};
+    \end{tikzpicture}
+  \end{frame}}
+
+% \corridorstatement{text} -- big thesis statement on paper
+\newcommand{\corridorstatement}[1]{%
+  \begin{frame}
+    \vfill
+    {\color{corTeal}\rule{1.3cm}{2.4pt}}\par\vspace{0.5em}
+    {\fontsize{22}{27}\selectfont\bfseries\color{corNavy}#1\par}
+    \vfill
+  \end{frame}}
+
+% \corridorcallout[kind]{text} -- inline tinted callout with accent left rule.
+% kind = note (teal, default) | warn (amber) | risk (red)
+\newcommand{\corridorcallout}[2][note]{%
+  \def\corridor@coclr{corTeal}%
+  \ifstrequal{#1}{warn}{\def\corridor@coclr{corAmber}}{}%
+  \ifstrequal{#1}{risk}{\def\corridor@coclr{corRed}}{}%
+  \par\medskip\noindent
+  \begin{tikzpicture}
+    \node[inner sep=8pt,text width=\dimexpr\linewidth-22pt\relax,align=left,
+          fill=\corridor@coclr!10,text=corInk] (corridor@co) {#2};
+    \draw[\corridor@coclr,line width=2.6pt]
+      (corridor@co.north west) -- (corridor@co.south west);
+  \end{tikzpicture}\par\medskip}
+
+% \corridortwoup{left header}{left body}{right header}{right body}
+\newcommand{\corridortwoup}[4]{%
+  \begin{columns}[T]
+    \begin{column}{0.46\textwidth}
+      {\color{corTeal}\rule{\linewidth}{2.4pt}}\par\vspace{4pt}
+      {\fontsize{11}{13}\selectfont\bfseries\color{corNavy}#1\par}\vspace{5pt}
+      {\fontsize{9}{12}\selectfont\color{corInk}#2\par}
+    \end{column}\hfill
+    \begin{column}{0.46\textwidth}
+      {\color{corTeal}\rule{\linewidth}{2.4pt}}\par\vspace{4pt}
+      {\fontsize{11}{13}\selectfont\bfseries\color{corNavy}#3\par}\vspace{5pt}
+      {\fontsize{9}{12}\selectfont\color{corInk}#4\par}
+    \end{column}
+  \end{columns}}
 
 \mode
 <all>

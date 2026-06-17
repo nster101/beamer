@@ -25,6 +25,9 @@ a major and minor version only.
   `corridorcards` row, `\corridorkpi` and the `corridorkpis` row, a
   `\corridorstat` big-number frame and a `corridorcompare` comparison-columns
   environment; see #6
+- `Corridor`: narrative slides --- a full-bleed `\corridorquote` frame, a
+  `\corridorstatement` big-statement frame, a `\corridorcallout` box
+  (note/warn/risk) and a `\corridortwoup` two-up layout; see #7
 
 ### Changed
 

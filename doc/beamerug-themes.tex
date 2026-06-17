@@ -130,6 +130,24 @@ All themes listed without author mentioned were developed by Till. If a theme ha
     A comparison column with an aligned accent header, used inside the |corridorcompare| environment. |\corridorcompcolhot| tints the column to mark a recommended option.
   \end{command}
 
+  For narrative and emphasis slides, Corridor adds:
+
+  \begin{command}{\corridorquote\marg{quote}\marg{attribution}}
+    A full-bleed navy frame carrying a large pull-quote and a smaller attribution line.
+  \end{command}
+
+  \begin{command}{\corridorstatement\marg{text}}
+    A frame built around one large statement on paper, with a teal accent bar---useful for a thesis or section punchline.
+  \end{command}
+
+  \begin{command}{\corridorcallout\oarg{kind}\marg{text}}
+    An inline tinted callout box with an accent left rule. \meta{kind} is |note| (teal, default), |warn| (amber) or |risk| (red). It can be used within any content frame.
+  \end{command}
+
+  \begin{command}{\corridortwoup\marg{left header}\marg{left body}\marg{right header}\marg{right body}}
+    A clean two-up emphasis layout with aligned accent headers.
+  \end{command}
+
   Corridor is a covered walkway connecting parts of a building---fitting for a theme meant to connect the parts of a professional presentation.
 \end{themeexample}
 
