@@ -63,6 +63,44 @@ When Till started naming the presentation themes, he soon ran out of ideas on ho
 
 All themes listed without author mentioned were developed by Till. If a theme has not been developed by us (that is, if someone else is to blame), this is indicated with the theme. We have sometimes slightly changed or ``corrected'' submitted themes, but we still list the original authors.
 
+\begin{themeexample}{Corridor}
+  A modern, business-grade corporate theme intended as a professional alternative to the academic stock themes. It uses deep navy and teal accents on warm paper, a thin progress bar along the top edge, a small-caps ``kicker'' eyebrow above each frame title, and a full-bleed navy title page carrying a decorative network motif. It is designed for wide aspect ratios; use for example |\documentclass[aspectratio=169]{beamer}|.
+
+  The signature typeface is Fira Sans (with Fira Mono for monospaced text). It is loaded automatically on |xelatex|/|lualatex| via |fontspec|, or on |pdflatex| via the |FiraSans|/|FiraMono| packages, whenever those resources are available; if they are not, the theme falls back to the default sans so it always compiles. The typographic hierarchy (sizes and weights) is the same regardless of which font is used.
+
+  The whole deck can be rebranded by redefining one of the raw palette colors \emph{before} loading the theme, for example:
+\begin{verbatim}
+\definecolor{corNavy}{HTML}{102A43}
+\usetheme{Corridor}
+\end{verbatim}
+  The raw colors are |corNavy|, |corTeal|, |corAmber|, |corRed|, |corInk|, |corGray|, |corFaint| and |corPaper|; every other color used by the theme is mixed from these.
+
+  \begin{command}{\kicker\marg{text}}
+    Sets the eyebrow line shown above the following frame title(s). It is ``sticky'': it stays in effect until changed. Set it to empty (|\kicker{}|) to remove it.
+  \end{command}
+
+  \begin{command}{\titlekicker\marg{text}}
+    Sets the eyebrow line shown on the title page (independent of the per-frame |\kicker|).
+  \end{command}
+
+  \begin{command}{\corridorfooterlabel\marg{left tag}\marg{right tag}}
+    Sets the two small-caps tags shown at the left of the footline. With no tags set, the footline shows the short title instead. The right of the footline always shows the short author, the date and the frame number, taken from |\author|, |\date| and the page counter.
+  \end{command}
+
+  The title page is driven by the usual |\title|, |\subtitle|, |\author|, |\institute| and |\date|. For the cleanest result (so the progress bar and footline are suppressed and the navy panel covers the whole slide) put it in a plain frame:
+\begin{verbatim}
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+\end{verbatim}
+
+  \begin{command}{\CorridorTitle\marg{kicker}\marg{title line 1}\marg{title line 2}\marg{subtitle}\marg{author}\marg{date}}
+    A convenience wrapper that sets the corresponding metadata and emits a plain title frame in one call.
+  \end{command}
+
+  Corridor is a covered walkway connecting parts of a building---fitting for a theme meant to connect the parts of a professional presentation.
+\end{themeexample}
+
 \begin{themeexample}{default}
   As the name suggests, this theme is installed by default. It is a sober no-nonsense theme that makes minimal use of color or font variations. This theme is useful for all kinds of talks, except for very long talks.
 \end{themeexample}

@@ -1,0 +1,111 @@
+% This file is part of the beamer package.
+%
+% Copyright 2026 by the beamer contributors
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file LICENSE.md for more details.
+%
+% Corridor colour theme.
+%
+% A professional, business-grade palette: deep navy and teal, with amber and
+% red accents, on warm paper. Every beamer colour below is *derived* from a
+% small set of "raw" colours by mixing, so the whole deck can be rebranded by
+% redefining a single colour. The raws are set with \providecolor, so anything
+% defined earlier -- a user \definecolor before \usetheme -- wins. With nothing
+% set, the navy/teal default applies.
+
+\mode<presentation>
+
+% Raw palette (defaults = navy / teal / warm paper)
+\providecolor{corNavy}{HTML}{0C2340}   % brand primary (deep navy)
+\providecolor{corTeal}{HTML}{0FA3A3}   % accent / structure (teal)
+\providecolor{corAmber}{HTML}{D98E04}  % secondary accent (amber)
+\providecolor{corRed}{HTML}{B0413E}    % alerts (muted red)
+\providecolor{corInk}{HTML}{222A33}    % body text (near-black slate)
+\providecolor{corGray}{HTML}{66707A}   % neutral mid-gray (chrome / captions)
+\providecolor{corFaint}{HTML}{E7E9E6}  % hairlines / progress-bar track
+\providecolor{corPaper}{HTML}{FCFCFA}  % slide background (warm paper)
+
+% Derived tints (one swap of a raw shifts the related scale)
+\colorlet{corpanel}{corTeal!10!corPaper}  % tinted card / panel fill
+\colorlet{corrule}{corTeal}               % accent hairlines / rules
+\colorlet{cormuted}{corGray}              % secondary text
+
+% Foundations
+\setbeamercolor{normal text}{fg=corInk,bg=corPaper}
+\setbeamercolor{alerted text}{fg=corRed}
+\setbeamercolor{example text}{fg=corTeal}
+\setbeamercolor{structure}{fg=corTeal}
+
+\setbeamercolor{background canvas}{parent=normal text}
+\setbeamercolor{background}{parent=background canvas}
+
+% Palette: accent fading toward navy
+\setbeamercolor{palette primary}{fg=corTeal}
+\setbeamercolor{palette secondary}{fg=corTeal!75!corNavy}
+\setbeamercolor{palette tertiary}{fg=corTeal!50!corNavy}
+\setbeamercolor{palette quaternary}{fg=corNavy}
+
+% Titles
+\setbeamercolor{titlelike}{fg=corNavy}
+\setbeamercolor{frametitle}{fg=corNavy,bg=}
+\setbeamercolor{framesubtitle}{fg=cormuted}
+\setbeamercolor{title}{fg=corPaper}        % title page sits on navy
+\setbeamercolor{subtitle}{fg=corFaint}
+\setbeamercolor{author}{fg=corPaper}
+\setbeamercolor{institute}{fg=corGray!60!white}
+\setbeamercolor{date}{fg=corGray!60!white}
+\setbeamercolor{titlegraphic}{}
+
+% The Corridor "eyebrow" / kicker line
+\setbeamercolor{kicker}{fg=corTeal}
+
+% Section / part pages (full-bleed navy, like the title)
+\setbeamercolor{part name}{fg=corTeal}
+\setbeamercolor{part title}{fg=corPaper}
+\setbeamercolor{section name}{fg=corTeal}
+\setbeamercolor{section title}{fg=corPaper}
+\setbeamercolor{subsection name}{fg=corTeal}
+\setbeamercolor{subsection title}{fg=corNavy}
+
+% Table of contents
+\setbeamercolor{section in toc}{fg=corNavy}
+\setbeamercolor{subsection in toc}{fg=cormuted}
+
+% Chrome (progress bar + footline)
+\setbeamercolor{headline}{fg=cormuted,bg=corPaper}
+\setbeamercolor{footline}{fg=corGray,bg=corPaper}
+\setbeamercolor{progress bar}{fg=corTeal,bg=corFaint}
+\setbeamercolor{page number in head/foot}{fg=corGray}
+\setbeamercolor{title in head/foot}{fg=corGray}
+\setbeamercolor{author in head/foot}{fg=corGray}
+\setbeamercolor{date in head/foot}{fg=corGray}
+\setbeamercolor{section in head/foot}{fg=corGray}
+\setbeamercolor{logo}{fg=corTeal}
+
+% Flat blocks: navy title bar, light panel body, no shadow
+\setbeamercolor{block title}{fg=corPaper,bg=corNavy}
+\setbeamercolor{block body}{fg=corInk,bg=corpanel}
+\setbeamercolor{block title alerted}{fg=corPaper,bg=corRed}
+\setbeamercolor{block body alerted}{fg=corInk,bg=corRed!12!corPaper}
+\setbeamercolor{block title example}{fg=corPaper,bg=corTeal!80!corNavy}
+\setbeamercolor{block body example}{fg=corInk,bg=corTeal!10!corPaper}
+
+% List markers in the accent colour
+\setbeamercolor{item}{fg=corTeal}
+\setbeamercolor{subitem}{fg=corTeal}
+\setbeamercolor{subsubitem}{fg=corTeal!70!corNavy}
+\setbeamercolor{itemize item}{parent=item}
+\setbeamercolor{itemize subitem}{parent=subitem}
+\setbeamercolor{itemize subsubitem}{parent=subsubitem}
+\setbeamercolor{enumerate item}{parent=item}
+
+\setbeamercolor{caption name}{fg=cormuted}
+\setbeamercolor{separation line}{}
+
+\mode
+<all>

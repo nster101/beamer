@@ -13,6 +13,10 @@ a major and minor version only.
 - added modern, flat, corporate `Aurora` presentation theme together with its
   composable `aurora` colour/font/inner/outer themes and a single-swap-point
   colour palette system (named palettes `slate`, `blue`, `teal`); see #2
+- added `Corridor`, a business-grade corporate presentation theme (navy/teal on
+  warm paper, top progress bar, kicker eyebrow, full-bleed network-motif title
+  page, optional Fira Sans with graceful fallback) and its composable
+  `corridor` colour/font/inner/outer themes; see #4
 
 ### Fixed
 
