@@ -1,0 +1,43 @@
+% This file is part of the beamer package.
+%
+% Copyright 2026 by the beamer contributors
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file LICENSE.md for more details.
+%
+% Corridor: a professional, business-grade corporate presentation theme.
+%
+%   \usetheme{Corridor}
+%
+% Deep navy and teal on warm paper, a thin top progress bar, a kicker eyebrow
+% above each frame title, and a full-bleed navy title page with a network
+% motif. Designed for 16:9 / 16:10; use e.g.
+%
+%   \documentclass[aspectratio=169]{beamer}
+%
+% The signature face is Fira Sans, loaded automatically when available with a
+% graceful fallback to the default sans (so it always compiles, including CI).
+% Set \kicker{...} before a frame for its eyebrow line; rebrand the whole deck
+% by redefining a raw colour before \usetheme, e.g.
+%
+%   \definecolor{corNavy}{HTML}{102A43}
+%   \usetheme{Corridor}
+
+\mode<presentation>
+
+\ProcessOptionsBeamer
+
+\usecolortheme{corridor}
+\usefonttheme{corridor}
+\useinnertheme{corridor}
+\useoutertheme{corridor}
+
+% Numbered captions, in the Corridor caption colour/size (set by the sub-themes)
+\setbeamertemplate{caption}[numbered]
+
+\mode
+<all>

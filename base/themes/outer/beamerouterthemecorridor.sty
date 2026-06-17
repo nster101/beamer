@@ -1,0 +1,103 @@
+% This file is part of the beamer package.
+%
+% Copyright 2026 by the beamer contributors
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file LICENSE.md for more details.
+%
+% Corridor outer theme.
+%
+% The Corridor "chrome": a thin top progress bar, a kicker eyebrow above each
+% frame title (small-caps teal), a flat accent frame title with a short teal
+% underline, and a slim two-line footline. Everything is driven by document
+% metadata (\title, \author, \date, \kicker) rather than hardcoded text, so the
+% theme is reusable across decks.
+
+\mode<presentation>
+
+\RequirePackage{etoolbox}
+\RequirePackage{tikz}
+\usetikzlibrary{calc,arrows.meta,positioning}
+
+% Fallbacks so this outer theme is usable on its own, without the Corridor
+% colour theme. \providecolor never overrides an existing definition.
+\providecolor{corNavy}{HTML}{0C2340}
+\providecolor{corTeal}{HTML}{0FA3A3}
+\providecolor{corFaint}{HTML}{E7E9E6}
+\providecolor{corPaper}{HTML}{FCFCFA}
+
+% No navigation chrome
+\setbeamertemplate{navigation symbols}{}
+
+% --------------------------------------------------------- progress bar --
+\defbeamertemplate*{headline}{Corridor}{%
+  \usebeamercolor{progress bar}%
+  \begin{tikzpicture}
+    \useasboundingbox (0,0) rectangle (\paperwidth,1.6pt);
+    \fill[bg] (0,0) rectangle (\paperwidth,1.6pt);
+    \ifnum\inserttotalframenumber>0\relax
+      \pgfmathsetmacro{\cor@prog}{\insertframenumber/\inserttotalframenumber}%
+      \fill[fg] (0,0) rectangle (\cor@prog*\paperwidth,1.6pt);
+    \fi
+  \end{tikzpicture}\vspace{-0.6em}}
+
+% --------------------------------------------- kicker + frame title --
+% \kicker{...} sets the eyebrow line shown above the next frame title(s).
+% It is sticky (persists until changed), matching the original Corridor deck.
+\newcommand\corridor@kicker{}
+\newcommand{\kicker}[1]{\renewcommand\corridor@kicker{#1}}
+
+\defbeamertemplate*{frametitle}{Corridor}{%
+  \vspace*{0.62cm}%
+  {\usebeamerfont{kicker}\usebeamercolor[fg]{kicker}%
+    \ifdefempty{\corridor@kicker}{}{\corridor@kicker}\par}%
+  \vspace*{0.10cm}%
+  {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+  \ifx\insertframesubtitle\@empty\else
+    \vspace*{0.04cm}%
+    {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}%
+      \insertframesubtitle\par}%
+  \fi
+  \vspace*{0.12cm}%
+  {\color{corTeal}\rule{1.3cm}{2.4pt}}%
+  \vspace*{0.12cm}}
+
+% ------------------------------------------------------------ footline --
+% Left: two small-caps "eyebrow" tags (default: the short title). Right:
+% short author, date and frame number, all from metadata.
+\newcommand\corridor@footlabelA{}
+\newcommand\corridor@footlabelB{}
+\newcommand{\corridorfooterlabel}[2]{%
+  \renewcommand\corridor@footlabelA{#1}%
+  \renewcommand\corridor@footlabelB{#2}}
+
+\newcommand\corridor@footleft{%
+  \ifdefempty{\corridor@footlabelA}
+    {\MakeUppercase{\insertshorttitle}}%
+    {\corridor@footlabelA
+     \ifdefempty{\corridor@footlabelB}{}%
+       {\quad\textcolor{corFaint}{\rule[0.2ex]{0.35cm}{0.4pt}}\quad
+        \corridor@footlabelB}}}
+
+\newcommand\corridor@footright{%
+  \insertshortauthor
+  \ \ \textperiodcentered\ \ \insertshortdate
+  \ \ \textperiodcentered\ \ \insertframenumber\,/\,\inserttotalframenumber}
+
+\defbeamertemplate*{footline}{Corridor}{%
+  \hspace*{1.05cm}%
+  \begin{minipage}{\dimexpr\paperwidth-2.1cm\relax}
+    {\color{corFaint}\hrule height 0.4pt}\vspace{2.5pt}
+    {\usebeamerfont{footline}\usebeamercolor[fg]{footline}%
+      \corridor@footleft\hfill\corridor@footright}%
+  \end{minipage}\hspace*{1.05cm}\vspace{6pt}}
+
+% Margins
+\setbeamersize{text margin left=1.05cm,text margin right=1.05cm}
+
+\mode
+<all>

@@ -89,27 +89,28 @@ themes =
         "Goettingen", "Hannover", "Ilmenau", "JuanLesPins", "Luebeck",
         "Malmoe", "Madrid", "Marburg", "Montpellier", "PaloAlto",
         "Pittsburgh", "Rochester", "Singapore", "Szeged", "Warsaw",
-        "CambridgeUS", "default", "boxes", "Aurora"
+        "CambridgeUS", "default", "boxes", "Aurora", "Corridor"
       },
     font =
       {
         "default", "serif", "structurebold", "structureitalicserif",
-        "structuresmallcapsserif", "aurora"
+        "structuresmallcapsserif", "aurora", "corridor"
       },
     color =
       {
         "default", "crane", "albatross", "seahorse", "whale", "dolphin",
         "rose", "orchid", "sidebartab", "lily", "structure", "dove", "seagull",
         "beetle", "fly", "wolverine", "spruce", "beaver", "monarca",
-        "aurora",
+        "aurora", "corridor",
         "albatrossstylish" -- This is a special case: see the .tex file
       },
     outer =
       {
         "default", "infolines", "miniframes", "shadow", "sidebar",
-        "smoothbars", "smoothtree", "split", "tree", "aurora"
+        "smoothbars", "smoothtree", "split", "tree", "aurora", "corridor"
       },
-    inner = {"default", "circles", "rectangles", "rounded", "inmargin", "aurora"}
+    inner = {"default", "circles", "rectangles", "rounded", "inmargin",
+        "aurora", "corridor"}
   }
 
 function typeset_demo_tasks()
