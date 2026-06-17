@@ -11,32 +11,22 @@
 %
 % Aurora font theme.
 %
-% Targets modern engines (XeTeX/LuaTeX) for a clean sans typeface via
-% fontspec, but degrades gracefully on pdfTeX. The *typographic system*
-% (sizes/weights set through \setbeamerfont) is engine-independent, so the
-% visual hierarchy -- and the regression-test log -- are stable everywhere;
-% only the actual typeface differs by engine.
+% A clean modern sans. The actual typeface is loaded by the shared corporate
+% engine (beamercorporatekit): Fira Sans (then Lato, then Source Sans Pro) via
+% fontspec on XeTeX/LuaTeX, with a graceful fallback to the default sans on
+% pdfTeX so the deck always compiles. The typographic *system* below (sizes /
+% weights) is engine- and font-independent, so the visual hierarchy -- and the
+% regression-test log -- stay stable everywhere; only the typeface differs.
 
 \mode<presentation>
 
-\RequirePackage{iftex}
+\RequirePackage{beamercorporatekit}
 
-\newif\ifbeamer@aurora@modern
-\ifxetex\beamer@aurora@moderntrue\fi
-\ifluatex\beamer@aurora@moderntrue\fi
-
-\ifbeamer@aurora@modern
-  \RequirePackage{fontspec}
-  % Pick a modern sans if available; never error if it is not installed.
-  \IfFontExistsTF{Fira Sans}
-    {\setsansfont{Fira Sans}[Numbers=Lining]}
-    {\IfFontExistsTF{Lato}
-      {\setsansfont{Lato}}
-      {\IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{}}}%
-\fi
-
-% Modern decks are set in sans; this holds on every engine.
-\renewcommand*\familydefault{\sfdefault}
+\setcorporatesansfont{
+  font=Fira Sans,
+  options=Numbers=Lining,
+  fallback={Lato,Source Sans Pro}
+}
 
 % Engine-independent typographic system
 \setbeamerfont{title}{size=\LARGE,series=\bfseries}

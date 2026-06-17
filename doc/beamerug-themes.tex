@@ -190,6 +190,8 @@ The following \meta{options} may be given:
 
 The themes in this section aim at a flat, professional, ``business'' look rather than the more academic appearance of the classic themes. They are built to be rebranded easily and are best enjoyed on a modern engine (Lua\TeX\ or Xe\TeX), where a clean sans-serif typeface is selected automatically through |fontspec|. They remain fully usable with pdf\TeX, which falls back gracefully to the default sans font; only the typeface differs, the layout and colour system are identical on every engine.
 
+These themes share a small engine, |beamercorporatekit|, which a colour theme loads to derive a complete beamer colour set from a two-anchor palette using \declare{|\setcorporatepalette|}|{brand=...,accent=...,ink=...,gray=...,paper=...,alert=...}| (with |titlestyle=light| or |dark|), and which a font theme uses to load a sans typeface with a graceful fallback via \declare{|\setcorporatesansfont|}. Building a new corporate theme on this engine therefore amounts to declaring a handful of raw colours and a font.
+
 \begin{themeexample}[\oarg{options}]{Aurora}
   A modern, flat presentation theme with no navigational chrome: there are no navigation symbols and no section tree, only a slim footline carrying the short title, short author, optional logo and the page number, with a thin accent rule above it. Frame titles are flat, left-aligned and accent-coloured; blocks are flat panels without shadows.
 

@@ -14,6 +14,13 @@ a major and minor version only.
   composable `aurora` colour/font/inner/outer themes and a single-swap-point
   colour palette system (named palettes `slate`, `blue`, `teal`); see #2
 
+### Changed
+
+- factored the shared corporate engine out of Aurora into
+  `beamercorporatekit` (`\setcorporatepalette`, `\setcorporatesansfont`), a
+  reusable base that corporate themes build on; Aurora's output is unchanged;
+  see #11
+
 ### Fixed
 
 - redefined `\hyper@natlinkbreak`, see https://github.com/josephwright/beamer/pull/961#issuecomment-4149877759

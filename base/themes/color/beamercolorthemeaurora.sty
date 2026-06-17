@@ -11,97 +11,33 @@
 %
 % Aurora colour theme.
 %
-% A modern, flat, corporate palette driven from a small set of "raw" colours.
-% Every beamer colour below is *derived* from these raws by mixing, so the
-% whole deck can be rebranded by redefining a single colour. The raws are set
-% with \providecolor, so anything defined earlier -- a palette file or a user
-% \definecolor before \usetheme -- wins. With nothing set, the slate/teal
-% default applies.
+% A modern, flat, corporate palette. The whole beamer colour set is derived
+% from a small set of "raw" colours by the shared corporate engine
+% (beamercorporatekit). The raws are set with \providecolor, so anything
+% defined earlier -- a palette file or a user \definecolor before \usetheme --
+% wins. With nothing set, the slate/teal default applies. Aurora uses a single
+% accent (brand == accent) on a light surface.
 
 \mode<presentation>
 
+\RequirePackage{beamercorporatekit}
+
 % Raw palette (defaults = slate/teal)
-\providecolor{auroraAccent}{HTML}{0F766E}    % brand primary (teal)
+\providecolor{auroraAccent}{HTML}{0F766E}    % brand / accent (teal)
 \providecolor{auroraAccentAlt}{HTML}{D97706} % secondary / alert (amber)
 \providecolor{auroraInk}{HTML}{1E293B}       % near-black slate text
 \providecolor{auroraGray}{HTML}{64748B}      % neutral mid-gray
 \providecolor{auroraPaper}{HTML}{FFFFFF}     % slide background
 
-% Derived neutrals (one swap of auroraGray shifts the whole scale)
-\colorlet{aurorapanel}{auroraGray!12!auroraPaper} % flat block / panel fill
-\colorlet{aurorarule}{auroraGray!35!auroraPaper}  % hairlines
-\colorlet{auroramuted}{auroraGray!92!auroraInk}   % secondary text / chrome
-
-% Foundations
-\setbeamercolor{normal text}{fg=auroraInk,bg=auroraPaper}
-\setbeamercolor{alerted text}{fg=auroraAccentAlt}
-\setbeamercolor{example text}{fg=auroraAccent!70!auroraInk}
-
-\setbeamercolor{structure}{fg=auroraAccent}
-
-\setbeamercolor{background canvas}{parent=normal text}
-\setbeamercolor{background}{parent=background canvas}
-
-% Palette: accent fading toward ink
-\setbeamercolor{palette primary}{fg=auroraAccent}
-\setbeamercolor{palette secondary}{fg=auroraAccent!80!auroraInk}
-\setbeamercolor{palette tertiary}{fg=auroraAccent!60!auroraInk}
-\setbeamercolor{palette quaternary}{fg=auroraInk}
-
-% Titles
-\setbeamercolor{titlelike}{fg=auroraAccent}
-\setbeamercolor{title}{parent=titlelike}
-\setbeamercolor{subtitle}{fg=auroramuted}
-\setbeamercolor{author}{fg=auroraInk}
-\setbeamercolor{institute}{fg=auroramuted}
-\setbeamercolor{date}{fg=auroramuted}
-\setbeamercolor{titlegraphic}{}
-
-\setbeamercolor{part name}{fg=auroramuted}
-\setbeamercolor{part title}{fg=auroraAccent}
-\setbeamercolor{section name}{fg=auroramuted}
-\setbeamercolor{section title}{fg=auroraAccent}
-\setbeamercolor{subsection name}{fg=auroramuted}
-\setbeamercolor{subsection title}{fg=auroraAccent}
-
-% Table of contents
-\setbeamercolor{section in toc}{fg=auroraInk}
-\setbeamercolor{subsection in toc}{fg=auroramuted}
-
-% Chrome (kept light)
-\setbeamercolor{headline}{fg=auroramuted,bg=auroraPaper}
-\setbeamercolor{footline}{fg=auroramuted,bg=auroraPaper}
-\setbeamercolor{page number in head/foot}{fg=auroramuted}
-\setbeamercolor{title in head/foot}{fg=auroramuted}
-\setbeamercolor{author in head/foot}{fg=auroramuted}
-\setbeamercolor{date in head/foot}{fg=auroramuted}
-\setbeamercolor{section in head/foot}{fg=auroramuted}
-\setbeamercolor{subsection in head/foot}{fg=auroramuted}
-\setbeamercolor{logo}{fg=auroraAccent}
-
-% Frame title: flat, accent text, no background fill
-\setbeamercolor{frametitle}{fg=auroraAccent,bg=}
-\setbeamercolor{framesubtitle}{fg=auroramuted}
-
-% Flat blocks: accent title bar, light panel body, no shadow
-\setbeamercolor{block title}{fg=auroraPaper,bg=auroraAccent}
-\setbeamercolor{block body}{fg=auroraInk,bg=aurorapanel}
-\setbeamercolor{block title alerted}{fg=auroraPaper,bg=auroraAccentAlt}
-\setbeamercolor{block body alerted}{fg=auroraInk,bg=auroraAccentAlt!12!auroraPaper}
-\setbeamercolor{block title example}{fg=auroraPaper,bg=auroraAccent!70!auroraInk}
-\setbeamercolor{block body example}{fg=auroraInk,bg=auroraAccent!8!auroraPaper}
-
-% List markers in the accent colour
-\setbeamercolor{item}{fg=auroraAccent}
-\setbeamercolor{subitem}{fg=auroraAccent!75!auroraInk}
-\setbeamercolor{subsubitem}{fg=auroraAccent!55!auroraInk}
-\setbeamercolor{itemize item}{parent=item}
-\setbeamercolor{itemize subitem}{parent=subitem}
-\setbeamercolor{itemize subsubitem}{parent=subsubitem}
-\setbeamercolor{enumerate item}{parent=item}
-
-\setbeamercolor{caption name}{fg=auroramuted}
-\setbeamercolor{separation line}{}
+\setcorporatepalette{
+  brand=auroraAccent,
+  accent=auroraAccent,
+  ink=auroraInk,
+  gray=auroraGray,
+  paper=auroraPaper,
+  alert=auroraAccentAlt,
+  titlestyle=light
+}
 
 \mode
 <all>
