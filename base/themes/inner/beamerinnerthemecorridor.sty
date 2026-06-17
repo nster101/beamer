@@ -134,5 +134,66 @@
     \titlepage
   \end{frame}}
 
+% ------------------------------------------------- section / part pages --
+% Full-bleed navy dividers in the title-page idiom, driven by \section /
+% \part. Shown via \sectionpage / \partpage, or automatically by enabling
+% \corridorautosection / \corridorautopart (off by default to avoid
+% surprising existing decks).
+\defbeamertemplate*{section page}{Corridor}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[corNavy] (current page.south west) rectangle (current page.north east);
+    \begin{scope}[shift={($(current page.north east)+(-3.4,-1.9)$)},scale=0.82]
+      \corridornetwork
+    \end{scope}
+    \node[anchor=west,text width=0.78\paperwidth,inner sep=0pt]
+      at ($(current page.west)+(1.05,0.35)$) {%
+        {\usebeamerfont{section name}\usebeamercolor[fg]{section name}%
+          \MakeUppercase{\sectionname}\ \insertsectionnumber\par}%
+        \vspace{0.40em}%
+        {\color{corTeal}\rule{1.3cm}{2.4pt}\par}%
+        \vspace{0.50em}%
+        {\usebeamerfont{section title}\usebeamercolor[fg]{section title}%
+          \insertsectionhead\par}};
+  \end{tikzpicture}}
+
+\defbeamertemplate*{part page}{Corridor}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[corNavy] (current page.south west) rectangle (current page.north east);
+    \begin{scope}[shift={($(current page.north east)+(-3.4,-1.9)$)},scale=0.82]
+      \corridornetwork
+    \end{scope}
+    \node[anchor=west,text width=0.78\paperwidth,inner sep=0pt]
+      at ($(current page.west)+(1.05,0.35)$) {%
+        {\usebeamerfont{part name}\usebeamercolor[fg]{part name}%
+          \MakeUppercase{\partname}\ \insertromanpartnumber\par}%
+        \vspace{0.40em}%
+        {\color{corTeal}\rule{1.3cm}{2.4pt}\par}%
+        \vspace{0.50em}%
+        {\usebeamerfont{part title}\usebeamercolor[fg]{part title}%
+          \insertpart\par}};
+  \end{tikzpicture}}
+
+% Opt-in automatic dividers
+\newcommand{\corridorautosection}{%
+  \AtBeginSection[]{\begin{frame}[plain,noframenumbering]\sectionpage\end{frame}}}
+\newcommand{\corridorautopart}{%
+  \AtBeginPart{\begin{frame}[plain,noframenumbering]\partpage\end{frame}}}
+
+% ----------------------------------------------------- table of contents --
+% Teal square marker before each section entry; subsections stay quiet.
+\defbeamertemplate*{section in toc}{Corridor}{%
+  \leavevmode
+  {\usebeamercolor{itemize item}%
+    \tikz[baseline=-0.35ex]{\fill[fg] (0,0) rectangle (0.6ex,0.6ex);}}\hspace{0.7em}%
+  {\usebeamerfont{section in toc}\usebeamercolor[fg]{section in toc}%
+    \inserttocsection}\par}
+
+% Agenda convenience: a frame whose body is the table of contents, with an
+% optional frame title (default "Agenda"). For a progress agenda that
+% highlights the current section, write a normal frame with
+% \tableofcontents[currentsection] instead.
+\newcommand{\corridoragenda}[1][Agenda]{%
+  \begin{frame}{#1}\tableofcontents\end{frame}}
+
 \mode
 <all>

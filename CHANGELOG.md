@@ -17,6 +17,10 @@ a major and minor version only.
   warm paper, top progress bar, kicker eyebrow, full-bleed network-motif title
   page, optional Fira Sans with graceful fallback) and its composable
   `corridor` colour/font/inner/outer themes; see #4
+- `Corridor`: structure slides --- full-bleed navy `section`/`part` page
+  dividers, opt-in automatic dividers (`\corridorautosection`,
+  `\corridorautopart`), a teal-marked table of contents and a
+  `\corridoragenda` convenience frame; see #5
 
 ### Changed
 
