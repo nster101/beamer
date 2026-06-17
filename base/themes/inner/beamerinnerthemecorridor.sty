@@ -314,5 +314,54 @@
     \end{column}
   \end{columns}}
 
+% --------------------------------------------------------------- visual --
+% Image-led frames and a themed TikZ drawing surface.
+
+% \corridorfullimage[overlay title]{image} -- image filling the whole slide,
+% with an optional navy scrim band carrying an overlaid title at the bottom.
+\newcommand{\corridorfullimage}[2][]{%
+  \begin{frame}[plain,noframenumbering]
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[anchor=center,inner sep=0pt] at (current page.center)
+        {\includegraphics[width=\paperwidth,height=\paperheight]{#2}};
+      \ifstrempty{#1}{}{%
+        \fill[corNavy,opacity=0.58] (current page.south west)
+          rectangle ([yshift=2.0cm]current page.south east);
+        \node[anchor=south west,text=corPaper,inner sep=0pt,
+              text width=0.82\paperwidth]
+          at ($(current page.south west)+(1.05,0.5)$)
+          {\usebeamerfont{frametitle}#1};}%
+    \end{tikzpicture}
+  \end{frame}}
+
+% \corridorsplit{image}{text} -- half image, half text with a teal caption rule
+\newcommand{\corridorsplit}[2]{%
+  \begin{columns}[T]
+    \begin{column}{0.50\textwidth}\centering
+      \includegraphics[width=\linewidth]{#1}%
+    \end{column}\hfill
+    \begin{column}{0.45\textwidth}
+      {\color{corTeal}\rule{1.1cm}{2.4pt}}\par\vspace{0.5em}
+      {\fontsize{9.5}{13}\selectfont\color{corInk}#2\par}
+    \end{column}
+  \end{columns}}
+
+% Diagram canvas: a centered TikZ picture preloaded with Corridor node styles
+% (pill, pillhot) and accent arrows/flows, so on-brand diagrams need no
+% per-frame \tikzset. The "corridor" style is namespaced to avoid clobbering
+% a user's own styles; \corridortikzset enables it inside a hand-built picture.
+\tikzset{
+  corridor/.style={
+    pill/.style={draw=corNavy,line width=1pt,rounded corners=3pt,fill=white,
+      align=center,inner sep=5pt,text=corNavy,font=\small\bfseries},
+    pillhot/.style={pill,draw=corTeal,fill=corTeal!10},
+    corridorarrow/.style={-{Stealth[length=5pt]},corTeal,line width=1pt},
+    corridorflow/.style={corTeal,line width=1pt},
+  }}
+\newcommand{\corridortikzset}{\tikzset{corridor}}
+\newenvironment{corridorcanvas}[1][]
+  {\begin{center}\begin{tikzpicture}[corridor,#1]}
+  {\end{tikzpicture}\end{center}}
+
 \mode
 <all>
