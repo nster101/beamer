@@ -1,0 +1,86 @@
+% This file is part of the beamer package.
+%
+% Copyright 2026 by the beamer contributors
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file LICENSE.md for more details.
+%
+% Aurora inner theme.
+%
+% Modern square bullets and flat, left-aligned title / section / part pages.
+% Blocks are intentionally left to the default templates: combined with the
+% Aurora colour theme (which gives block title/body a flat fill and no
+% shadow) they already render as flat cards.
+
+\mode<presentation>
+
+% Modern square list markers (drawn in the current item colour)
+\defbeamertemplate*{itemize item}{aurora}%
+  {\rule[0.05ex]{0.72ex}{0.72ex}}
+\defbeamertemplate*{itemize subitem}{aurora}%
+  {\rule[0.05ex]{0.6ex}{0.6ex}}
+\defbeamertemplate*{itemize subsubitem}{aurora}%
+  {\rule[0.18ex]{0.6ex}{0.18ex}}
+
+% Title page: flat, left-aligned, accent bar
+\defbeamertemplate*{title page}{aurora}
+{%
+  \vbox{}\vfill
+  \begingroup
+    \raggedright
+    {\usebeamercolor[fg]{frametitle}\rule{0.18\paperwidth}{2.5pt}\par}%
+    \vskip0.9em%
+    {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+    \ifx\insertsubtitle\@empty%
+    \else%
+      \vskip0.3em%
+      {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+    \fi%
+    \vskip1.3em%
+    {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}%
+    \vskip0.2em%
+    {\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}%
+    \vskip0.2em%
+    {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}%
+    \vskip0.8em%
+    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}%
+  \endgroup
+  \vfill
+}
+
+% Part page: big part number, accent bar, part title
+\defbeamertemplate*{part page}{aurora}
+{%
+  \vbox{}\vfill
+  \begingroup
+    \raggedright
+    {\usebeamerfont{part name}\usebeamercolor[fg]{part name}%
+      \partname~\insertromanpartnumber\par}%
+    {\usebeamercolor[fg]{part title}\rule{0.18\paperwidth}{2.5pt}\par}%
+    \vskip0.7em%
+    {\usebeamerfont{part title}\usebeamercolor[fg]{part title}\insertpart\par}%
+  \endgroup
+  \vfill
+}
+
+% Section page: big section number, accent bar, section title
+\defbeamertemplate*{section page}{aurora}
+{%
+  \vbox{}\vfill
+  \begingroup
+    \raggedright
+    {\usebeamerfont{section name}\usebeamercolor[fg]{section name}%
+      \sectionname~\insertsectionnumber\par}%
+    {\usebeamercolor[fg]{section title}\rule{0.18\paperwidth}{2.5pt}\par}%
+    \vskip0.7em%
+    {\usebeamerfont{section title}\usebeamercolor[fg]{section title}\insertsection\par}%
+  \endgroup
+  \vfill
+}
+
+\mode
+<all>

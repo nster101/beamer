@@ -186,6 +186,27 @@ The following \meta{options} may be given:
   Rochester is a town in upstate New York, USA. Till visited Rochester in 2001.
 \end{themeexample}
 
+\subsection{Modern Corporate Theme}
+
+The themes in this section aim at a flat, professional, ``business'' look rather than the more academic appearance of the classic themes. They are built to be rebranded easily and are best enjoyed on a modern engine (Lua\TeX\ or Xe\TeX), where a clean sans-serif typeface is selected automatically through |fontspec|. They remain fully usable with pdf\TeX, which falls back gracefully to the default sans font; only the typeface differs, the layout and colour system are identical on every engine.
+
+\begin{themeexample}[\oarg{options}]{Aurora}
+  A modern, flat presentation theme with no navigational chrome: there are no navigation symbols and no section tree, only a slim footline carrying the short title, short author, optional logo and the page number, with a thin accent rule above it. Frame titles are flat, left-aligned and accent-coloured; blocks are flat panels without shadows.
+
+  The whole look is driven by a small palette that can be changed in a single place. The five ``raw'' colours are |auroraAccent| (the brand colour), |auroraAccentAlt| (a secondary/alert colour), |auroraInk| (text), |auroraGray| (the neutral grey scale) and |auroraPaper| (the background); every other colour is derived from these by mixing. To rebrand an entire deck it therefore suffices to redefine a single colour \emph{before} loading the theme:
+\begin{verbatim}
+\definecolor{auroraAccent}{HTML}{0B5FFF}
+\usetheme{Aurora}
+\end{verbatim}
+
+  Alternatively, a ready-made palette can be selected with the \declare{|palette=|\meta{name}} option, where \meta{name} is one of |slate| (the default), |blue| or |teal|:
+\begin{verbatim}
+\usetheme[palette=blue]{Aurora}
+\end{verbatim}
+
+  The building blocks are also available individually as the |aurora| colour, font, inner and outer themes, so they can be mixed with other themes.
+\end{themeexample}
+
 \subsection{Presentation Themes with a Tree-Like Navigation Bar}
 
 \begin{themeexample}[\oarg{option}]{Antibes}

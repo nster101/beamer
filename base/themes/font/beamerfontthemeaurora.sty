@@ -1,0 +1,59 @@
+% This file is part of the beamer package.
+%
+% Copyright 2026 by the beamer contributors
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file LICENSE.md for more details.
+%
+% Aurora font theme.
+%
+% Targets modern engines (XeTeX/LuaTeX) for a clean sans typeface via
+% fontspec, but degrades gracefully on pdfTeX. The *typographic system*
+% (sizes/weights set through \setbeamerfont) is engine-independent, so the
+% visual hierarchy -- and the regression-test log -- are stable everywhere;
+% only the actual typeface differs by engine.
+
+\mode<presentation>
+
+\RequirePackage{iftex}
+
+\newif\ifbeamer@aurora@modern
+\ifxetex\beamer@aurora@moderntrue\fi
+\ifluatex\beamer@aurora@moderntrue\fi
+
+\ifbeamer@aurora@modern
+  \RequirePackage{fontspec}
+  % Pick a modern sans if available; never error if it is not installed.
+  \IfFontExistsTF{Fira Sans}
+    {\setsansfont{Fira Sans}[Numbers=Lining]}
+    {\IfFontExistsTF{Lato}
+      {\setsansfont{Lato}}
+      {\IfFontExistsTF{Source Sans Pro}{\setsansfont{Source Sans Pro}}{}}}%
+\fi
+
+% Modern decks are set in sans; this holds on every engine.
+\renewcommand*\familydefault{\sfdefault}
+
+% Engine-independent typographic system
+\setbeamerfont{title}{size=\LARGE,series=\bfseries}
+\setbeamerfont{subtitle}{size=\large,series=\mdseries}
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries}
+\setbeamerfont{framesubtitle}{size=\normalsize,series=\mdseries}
+\setbeamerfont{author}{size=\normalsize}
+\setbeamerfont{institute}{size=\small}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{part name}{size=\small,series=\bfseries}
+\setbeamerfont{part title}{size=\LARGE,series=\bfseries}
+\setbeamerfont{section name}{size=\small,series=\bfseries}
+\setbeamerfont{section title}{size=\LARGE,series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{section in toc}{series=\bfseries}
+\setbeamerfont{footline}{size=\scriptsize}
+
+\mode
+<all>
