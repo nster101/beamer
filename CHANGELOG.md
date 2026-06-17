@@ -21,6 +21,10 @@ a major and minor version only.
   dividers, opt-in automatic dividers (`\corridorautosection`,
   `\corridorautopart`), a teal-marked table of contents and a
   `\corridoragenda` convenience frame; see #5
+- `Corridor`: data and metric slides --- `\corridorcard` and the
+  `corridorcards` row, `\corridorkpi` and the `corridorkpis` row, a
+  `\corridorstat` big-number frame and a `corridorcompare` comparison-columns
+  environment; see #6
 
 ### Changed
 

@@ -112,6 +112,24 @@ All themes listed without author mentioned were developed by Till. If a theme ha
     Emits a frame (titled \emph{Agenda} by default) whose body is the table of contents, styled with teal section markers. For a progress agenda that highlights the current section, use a normal frame containing |\tableofcontents[currentsection]| instead.
   \end{command}
 
+  For data-driven business slides, Corridor provides several reusable components:
+
+  \begin{command}{\corridorcard\oarg{width}\marg{title}\marg{body}\marg{tag}}
+    A card with a teal top rule, a navy title, body text and a small tag line (default width |0.30\textwidth|). Place several inside the |corridorcards| environment, which spaces them evenly without manual |\hfill|.
+  \end{command}
+
+  \begin{command}{\corridorkpi\marg{value}\marg{label}\marg{delta}}
+    A KPI tile: a large value, a small grey label and an optional coloured delta (teal by default; put |\color{corRed}| in the delta for a downward move). Group several in the |corridorkpis| environment.
+  \end{command}
+
+  \begin{command}{\corridorstat\marg{number}\marg{caption}}
+    Emits a whole frame built around one large statistic with a supporting caption.
+  \end{command}
+
+  \begin{command}{\corridorcompcol\oarg{width}\marg{header}\marg{body}}
+    A comparison column with an aligned accent header, used inside the |corridorcompare| environment. |\corridorcompcolhot| tints the column to mark a recommended option.
+  \end{command}
+
   Corridor is a covered walkway connecting parts of a building---fitting for a theme meant to connect the parts of a professional presentation.
 \end{themeexample}
 

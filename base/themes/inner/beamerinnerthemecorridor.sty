@@ -195,5 +195,64 @@
 \newcommand{\corridoragenda}[1][Agenda]{%
   \begin{frame}{#1}\tableofcontents\end{frame}}
 
+% ------------------------------------------------------ data / metrics --
+% Reusable business components: cards, KPI tiles, a big-number stat frame and
+% comparison columns. The row environments space their children evenly by
+% emitting \hfill glue, so no manual \hfill is needed between items.
+
+% \corridorcard[width]{title}{body}{tag}
+\newcommand{\corridorcard}[4][0.30\textwidth]{%
+  \begin{minipage}[t]{#1}
+    \raggedright\hyphenpenalty=10000\exhyphenpenalty=10000\relax
+    {\color{corTeal}\rule{\linewidth}{2.4pt}}\par\vspace{4.5pt}
+    {\fontsize{10.5}{12.5}\selectfont\bfseries\color{corNavy}#2\par}\vspace{4pt}
+    {\fontsize{8.2}{10.8}\selectfont\color{corInk}#3\par}\vspace{5pt}
+    {\fontsize{7.2}{9}\selectfont\bfseries #4\par}
+  \end{minipage}\hfill}
+\newenvironment{corridorcards}
+  {\par\medskip\noindent\hfill\ignorespaces}{\unskip\par\medskip}
+
+% \corridorkpi{value}{label}{delta}  (delta may be empty; embed \color for sign)
+\newcommand{\corridorkpi}[3]{%
+  \begin{minipage}[t]{0.22\textwidth}\centering
+    {\fontsize{26}{30}\selectfont\bfseries\color{corNavy}#1\par}\vspace{2pt}
+    {\fontsize{8}{10}\selectfont\color{corGray}#2\par}%
+    \ifblank{#3}{}{\vspace{2pt}{\fontsize{8.5}{10}\selectfont\bfseries
+      \color{corTeal}#3\par}}%
+  \end{minipage}\hfill}
+\newenvironment{corridorkpis}
+  {\par\medskip\noindent\hfill\ignorespaces}{\unskip\par\medskip}
+
+% Big-number stat frame: \corridorstat{number}{caption}
+\newcommand{\corridorstat}[2]{%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      {\fontsize{58}{64}\selectfont\bfseries\color{corTeal}#1\par}
+      \vspace{0.45em}
+      {\usebeamerfont{frametitle}\color{corNavy}#2\par}
+    \end{center}
+    \vfill
+  \end{frame}}
+
+% Comparison columns: corridorcompare environment + \corridorcompcol.
+% \corridorcompcol[width]{header}{body}; starred variant tints the column
+% as the recommended/highlighted option.
+\newenvironment{corridorcompare}{\begin{columns}[T]}{\end{columns}}
+\newcommand{\corridorcompcol}[3][0.46\textwidth]{%
+  \begin{column}{#1}
+    {\color{corTeal}\rule{\linewidth}{2.4pt}}\par\vspace{4pt}
+    {\fontsize{11}{13}\selectfont\bfseries\color{corNavy}#2\par}\vspace{5pt}
+    {\fontsize{9}{12}\selectfont\color{corInk}#3\par}
+  \end{column}}
+\newcommand{\corridorcompcolhot}[3][0.46\textwidth]{%
+  \begin{column}{#1}
+    \colorbox{corTeal!10}{\begin{minipage}[t]{\dimexpr#1-2\fboxsep\relax}
+      {\color{corTeal}\rule{\linewidth}{2.4pt}}\par\vspace{4pt}
+      {\fontsize{11}{13}\selectfont\bfseries\color{corNavy}#2\par}\vspace{5pt}
+      {\fontsize{9}{12}\selectfont\color{corInk}#3\par}
+    \end{minipage}}%
+  \end{column}}
+
 \mode
 <all>
