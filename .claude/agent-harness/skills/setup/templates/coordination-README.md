@@ -46,10 +46,10 @@ code; feature PRs never touch `coordination/`.**
 
 ### Entry format
 ```
-### 2026-06-17T14:32Z — Euclid — claim #17
-Claiming #17 (Corridor -> beamercorporatekit). Branch euclid/17-corridor-onto-kit.
-Touches base/themes/color/beamercolorthemecorridor.sty and the corridor font theme.
-Gauss: please hold #19's Corridor inner/outer rewiring until this lands. ETA: today.
+### 2026-01-15T14:32Z — Euclid — claim #17
+Claiming #17 (add the export pipeline). Branch euclid/17-add-export-pipeline.
+Touches src/export/*.ts and the CLI entrypoint.
+Gauss: please hold #19's CLI refactor until this lands. ETA: today.
 ```
 - Heading: `### <UTC ISO-8601 to the minute> — <Agent> — <topic>`.
 - Topics: `delegate #n -> <Agent>`, `claim #n`, `done #n (PR #m)`, `blocked #n`,
@@ -88,6 +88,8 @@ PRs.
 
 ## Reusing this crew on another project
 
-The crew is packaged as a reusable Claude Code plugin under `.claude/agent-harness/`.
-See `.claude/agent-harness/README.md` for how to add it as a marketplace, install it,
-and run the `setup` skill (`/the-girls:setup`) to scaffold a new repository.
+The crew is packaged as a reusable Claude Code plugin (`the-girls`). Add it as a
+marketplace and install it, then run the `setup` skill (`/the-girls:setup`) to
+scaffold a new repository (`coordination/`, the `.claude/settings.json` permissions
+allowlist, the per-repo SessionStart hook, optional `/einstein`-style commands, and a
+`CLAUDE.md` section).
